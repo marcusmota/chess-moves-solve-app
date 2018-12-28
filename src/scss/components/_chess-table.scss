@@ -1,0 +1,35 @@
+.chess-table{
+
+    &--animated{
+        animation: fadeInOut 1s;
+    }
+
+    &__bg-color--transparent{
+        background-color: transparent !important;
+        border:none !important;
+    }
+
+    background-color: $color-grey-light-1;
+    padding: 20rem 0 0 0;
+    margin-top: -20vh;
+    
+    @include manager(tab-port){
+        padding: 10rem 0 0 0;
+    }
+
+    @include manager(tab-land){
+        padding: 14rem 0 0 0;
+    }
+
+    @include manager(phone){
+        padding: 12rem 0 0 0;
+    }
+
+    @include manager(big-desktop){
+        padding: 10rem 0 0 0;
+    }
+
+    &__piece{
+        margin-top: 7.5px;
+    }
+}

@@ -1,0 +1,47 @@
+.row-chess {
+
+    max-width: $grid-chess-width;
+    margin: 0 auto;
+
+    @include clearfix;
+
+    [class^="col-"]{
+        float: left;
+    }
+
+    &:nth-child(odd):not(:last-child):not(:first-child) .col-1-of-10:nth-child(even):not(:last-child):not(:first-child){
+        background-color: black;
+    }
+
+    &:nth-child(even):not(:last-child):not(:first-child) .col-1-of-10:nth-child(odd):not(:last-child):not(:first-child){
+        background-color: black;
+    }
+
+    &:not(:last-child):not(:first-child) .col-1-of-10:not(:last-child):not(:first-child){
+        border: 1px solid #777;
+    }
+
+    .col-1-of-10 {
+        
+        &__highlight {
+            background-color: red !important;
+            opacity: 0.80;
+        }
+    
+        height: $chess-cell-height;
+        text-align: center;
+        width: 10%;
+        
+        &__text{
+
+            position: relative;
+
+            & > span {
+                position: absolute;
+                transform: translateY(40%)
+            }
+        }
+    }
+
+}
+

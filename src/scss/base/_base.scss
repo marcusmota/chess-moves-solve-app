@@ -1,0 +1,36 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    // This defines what 1rem is 10px
+
+    font-size: 62.5%;
+
+
+    @include manager(tab-land){
+        font-size: 56.25%; //1rem = 9px, 9/16 = 50%
+    }
+    
+    @include manager(tab-port){
+        font-size: 40%; //1rem = 6.4px, 6.4/16 = 40%
+    }
+
+    @include manager(phone){
+        font-size: 30% //1rem = 4.8px, 4.8/16 = 30%
+    }
+
+    @include manager(big-desktop){
+        font-size: 75%; //1rem = 12px, 12/16 = 75%
+    }
+
+
+}
+
+body {
+    box-sizing: border-box;
+}
