@@ -70,6 +70,7 @@ body {
 .paragraph-tip{
     font-size: $default-font-size;
 
+    padding: 1rem 5rem;
     &:not(:last-child){
         margin-bottom: 3px;
     }

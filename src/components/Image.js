@@ -5,7 +5,7 @@ class Image extends Component {
 
     render(){
 	return (
-        <img src={this.props.src} height={this.props.height} className={this.props.className} />
+        <img alt={this.props.src} src={this.props.src} height={this.props.height} className={this.props.className} />
         );
     }
 

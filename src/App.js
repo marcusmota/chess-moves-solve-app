@@ -1,7 +1,6 @@
 import Image from './components/Image';
 import ColumnChess from './components/ColumnChess';
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './css/style.css';
 import * as chessRepository from './repository/chessRepository';
 import { ToastContainer, toast } from 'react-toastify';
@@ -172,15 +171,16 @@ class App extends Component {
           <div className="paragraph-tip u-center-text">
             {this.state.moves.length > 0 ? <p>Available Moves from {this.state.position} with {this.state.turns} turns are {this.state.moves.length}</p> : <p>Select a cell by clicking / tapping then click on "Tip me!" to see the available moves into the next {this.state.turns} turns</p>} 
              
-             <div className="row">
                 {this.state.moves.map((ff,i) => {
                   let str = "";
-                  ff.forEach(arr => {
-                    str += arr+" > ";
+                  ff.forEach((arr, i2) => {
+                    if(i2 < ff.length-1)
+                      str += arr+" > ";
+                    else
+                      str += arr;
                   })
-                  return <div key={i+1} className="col-1-of-4">{str}</div>;
+                  return <span>{str} {i < this.state.moves.length -1 ? '|' : ''} </span>;
                 })}
-             </div>
           </div>
         </section>
       </div>
