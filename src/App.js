@@ -1,6 +1,5 @@
 import Image from './components/Image';
 import ColumnChess from './components/ColumnChess';
-import RowChess from './components/RowChess';
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './css/style.css';
@@ -45,27 +44,50 @@ class App extends Component {
   }
 
   incrementTurns(){
-
+    this.setState({
+      turns : this.state.turns + 1,
+      cells : {[this.state.position] : { available : true, highlight : true}}
+    }, this.checkPosition);
   }
 
   decrementTurns(){
-
+    this.setState({
+      turns : this.state.turns - 1,
+      cells : {[this.state.position] : { available : true, highlight : true}}
+    }, this.checkPosition);
   }
 
   getPiece(p) {
-
+    if(p === 'KNIGHT'){
+      return <Image src={require("./pieces/knight.png")} height="25px" className="chess-table__piece" />;
+    }
   }
 
   getStatusOfCell(st) {
-    
+    if(this.state.cells[st] && this.state.cells[st].highlight){
+      return true;
+    }else{
+      return false;
+    }
   }
 
   tryToMove(pos) {
- 
+    if(!this.state.position){
+      this.setState({position : pos, moves: [], cells : { [pos] : { available : true, highlight : true} }});
+    }else{
+      chessRepository.getCouldMove('KNIGHT', this.state.position, pos).then((res) => {
+        if(res.data === true){
+          this.setState({position : pos,  moves: [],cells : { [pos] : { available : true, highlight : true} }});
+        }else{
+          toast.error("Invalid move, if you want a tip click on Tip me!")
+        }
+      }).catch(err => {
+        console.log(`Err: ${err}`);
+      })
+    }
   }
 
   checkPosition(){
-
     let pos = this.state.position
     
     this.startChessBoard();
@@ -84,7 +106,6 @@ class App extends Component {
     }).catch(err => {
       console.log(`Err: ${err}`);
     })
-
   }
 
   render() {
@@ -133,7 +154,7 @@ class App extends Component {
               &nbsp;
             </div>
             {this.state.columns.map((f2,i) => {
-                return <ColumnChess key={i+1} className={"col-1-of-10"} />
+                return <ColumnChess key={i+1} className={"col-1-of-10"} letter={f2}/>
              })}
             <div className="col-1-of-10">
               &nbsp;
@@ -143,9 +164,9 @@ class App extends Component {
         <section className="section-chess-footer">
           <div className="row">
             <div className="col-1-of-1">
-                <button className="btn btn-primary btn--bigger" disabled={!this.state.position} onClick={this.checkPosition.bind(this)}>Tip me!</button> &nbsp;
-                <button className="btn btn-success btn--bigger" disabled={!this.state.position || this.state.turns > 2} onClick={this.incrementTurns.bind(this)}>More turns</button>&nbsp;
-                <button className="btn btn-info btn--bigger" disabled={!this.state.position || this.state.turns === 1} onClick={this.decrementTurns.bind(this)}>Less turns</button>
+                <button className="btn btn-primary btn--bigger" id="btn-check-position" disabled={!this.state.position} onClick={this.checkPosition.bind(this)}>Tip me!</button> &nbsp;
+                <button className="btn btn-success btn--bigger" id="btn-check-increment-turns" disabled={!this.state.position || this.state.turns > 2} onClick={this.incrementTurns.bind(this)}>More turns</button>&nbsp;
+                <button className="btn btn-info btn--bigger" id="btn-check-decrement-turns" disabled={!this.state.position || this.state.turns === 1} onClick={this.decrementTurns.bind(this)}>Less turns</button>
             </div>
           </div>
           <div className="paragraph-tip u-center-text">
@@ -160,10 +181,7 @@ class App extends Component {
                   return <div key={i+1} className="col-1-of-4">{str}</div>;
                 })}
              </div>
-            
           </div>
-            
-        
         </section>
       </div>
     );
