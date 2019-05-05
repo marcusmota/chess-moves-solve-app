@@ -39,43 +39,19 @@ To run the tests just type npm run test
 
 ### Project Structure Explain
 
-src/index.js
+The file `src/index.js` the application boostrap
 
-```
-the application boostrap
-```
+The file `src/app.js` is the main application component
 
-src/App.js
+The folder `src/scss` has the sass files
 
-```
-the main application component
-```
+The folder `src/components` has the components and its tests files
 
+The folder `src/pieces` it has the pieces of chess images
 
-src/scss
-```
-it has the sass files
-```
+The folder `src/repository` has the repository files to write the API requests
 
-src/components
-```
-it has the components and its tests files
-```
-
-src/pieces
-```
-it has the pieces of chess images
-```
-
-src/repository
-```
-it has the repository files to write the API requests
-```
-
-src/params.json
-```
-it has the global variables like apiUrl, you want to change it, just change in the params.json file
-```
+The file `src/params.json` has the global variables like apiUrl, you want to change it, just change in the params.json file
 
 ## Contributing
 
